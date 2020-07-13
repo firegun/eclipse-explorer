@@ -179,10 +179,12 @@ public class ExplorerPlugin extends AbstractUIPlugin {
                         winCmd = String.format("%s /select,%s", cmd, file);
                     }
                     Runtime.getRuntime().exec(winCmd);
-                }
-                else {
-                    Runtime.getRuntime()
-                            .exec(String.format("%s %s", cmd, path)); //$NON-NLS-1$
+                } else {
+                    if (cmd.endsWith("=")) {
+                        Runtime.getRuntime().exec(String.format("%s%s", cmd, path)); //$NON-NLS-1$
+                    } else {
+                        Runtime.getRuntime().exec(String.format("%s %s", cmd, path)); //$NON-NLS-1$
+                    }
                 }
             } catch (IOException e) {
                 //
